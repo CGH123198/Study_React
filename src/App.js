@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import PropTypes from 'prop-types';
+import { Component } from 'react';
+import Say from './Say.js';
+import Counter from './Counter.js';
 import './App.css';
+
+class MyComponent extends Component {
+  render() {
+    const { name, favoriteNumber, children } = this.props;
+    return (
+      <div>
+        Hello, My name is {name}. <br />
+        The value of children is {children}. <br />
+        My favoriteNumber is {favoriteNumber}.
+      </div>
+    );
+  }
+}
+
+MyComponent.defaultProps = {
+  name: '기본 이름',
+  favoriteNumber: 11
+}
+
+MyComponent.propTypes = {
+  name: PropTypes.string,
+  favoriteNumber: PropTypes.number.isRequired
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MyComponent>리액트</MyComponent>
+      <Counter />
+      <Say />
     </div>
   );
 }
