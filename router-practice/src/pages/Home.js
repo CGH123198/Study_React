@@ -21,6 +21,9 @@ const Home = () => {
                 <li>
                     <Link to="/articles">게시글 목록</Link>
                 </li>
+                <li>
+                    <Link to="/mypage">로그인</Link>
+                </li>
             </ul>
         </div>
     );
