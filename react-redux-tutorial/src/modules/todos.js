@@ -1,9 +1,12 @@
+import { createAction, handleActions } from "redux-actions";
+import produce from 'immer';
+
 const CHANGE_INPUT = 'todos/CHANGE_INPUT';
 const INSERT = 'todos/INSERT';
 const TOGGLE = 'todos/TOGGLE';
 const REMOVE = 'todos/REMOVE';
 
-export const changeInput = input => ({
+/*export const changeInput = input => ({
     type: CHANGE_INPUT,
     input
 });
@@ -27,7 +30,20 @@ export const remove = id => ({
     type: REMOVE, 
     id
 });
+*/
 
+
+export const changeInput = createAction(CHANGE_INPUT, input => input);
+
+let id = 3;
+export const insert = createAction(INSERT, text => ({
+    id: id++,
+    text,
+    done: false,
+}));
+
+export const toggle = createAction(TOGGLE, id => id);
+export const remove = createAction(REMOVE, id => id);
 
 const initialState = {
     input: '',
@@ -46,7 +62,7 @@ const initialState = {
 };
 
 
-function todos(state = initialState, action) {
+/*function todos(state = initialState, action) {
     switch(action.type){
         case CHANGE_INPUT:
             return{
@@ -72,5 +88,26 @@ function todos(state = initialState, action) {
             return state;
     }
 }
+*/
+
+const todos = handleActions(
+    {
+        [CHANGE_INPUT]: (state, action) => produce(state, draft => {
+            draft.action.payload = action.payload;
+        }),
+        [INSERT]: (state, action) => produce(state, draft => {
+            draft.action.payload.push(action.payload);
+        }),
+        [TOGGLE]: (state, action) => produce(state, draft => {
+            const todo = draft.todos.find(todo => todo.id === action.payload);
+            todo.done = !todo.done;
+        }),
+        [REMOVE]: (state, action) => produce(state, draft => {
+            const index = draft.todos.findIndex(todo => todo.id === action.payload);
+            draft.todos.splice(index, 1);
+        }),
+    },
+    initialState,
+)
 
 export default todos;
