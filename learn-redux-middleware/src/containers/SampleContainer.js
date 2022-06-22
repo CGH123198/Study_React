@@ -13,10 +13,11 @@ const SampleContainer = (
     const dispatch = useDispatch();
     const dgetPost = useCallback( id => {
         dispatch(getPost(id));
-    }, [getPost]);
+    }, [dispatch]);
     const dgetUsers = useCallback( id => {
         dispatch(getUsers(id));
     }, [dispatch]);
+    
     useEffect( () => {
         dgetPost(1);
         dgetUsers(1);

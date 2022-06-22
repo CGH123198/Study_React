@@ -30,7 +30,7 @@ function App() {
 
       setTodos(todos => todos.concat(todo));
       nextId.current += 1; 
-    }, [],
+    }, []
   )
 
   const onRemove = useCallback(

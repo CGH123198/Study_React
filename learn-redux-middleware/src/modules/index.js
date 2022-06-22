@@ -1,12 +1,18 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
-import sample from './sample';
+import { all } from 'redux-saga/effects';
+import counter, {counterSaga} from './counter';
+import sample, { sampleSaga } from './sample';
 import loading from './loading';
+import { getAllByAltText } from '@testing-library/react';
 
 const rootReducer = combineReducers({
     counter,
     //sample,
     //loading
 });
+
+export function* rootSaga() {
+    yield all([counterSaga(), sampleSaga()]);
+}
 
 export default rootReducer;
