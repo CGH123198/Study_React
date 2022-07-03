@@ -1,13 +1,14 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({history}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [error, setError] = useState(null);
     const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
         form: auth.login,
         auth: auth.auth,
@@ -40,6 +41,7 @@ const LoginForm = () => {
         if(authError) {
             console.log('오류 발생');
             console.log(authError);
+            setError('로그인 실패');
         }
         if(auth) {
             console.log('로그인 성공');
@@ -50,6 +52,11 @@ const LoginForm = () => {
     useEffect( () => {
         if(user){
             navigate('/');
+            try {
+                localStorage.setItem('user', JSON.stringify(user));
+            } catch(e) {
+                console.log('localStorage is not working');
+            }
         }
     }, [navigate, user]);
 
@@ -59,6 +66,7 @@ const LoginForm = () => {
             form={form}
             onChange={onChange}
             onSubmit={onSubmit}
+            error={error}
         />
     );
 };

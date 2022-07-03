@@ -1,9 +1,10 @@
-import Button from '../components/common/Button';
+import HeaderContainer from "../containers/common/HeaderContainer";
 
 const PostListPage = () => {
     return (
         <div>
-            <Button>버튼</Button>
+            <HeaderContainer />
+            <div>포스트 리스트</div>
         </div>
     );
 };
