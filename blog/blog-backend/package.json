@@ -21,7 +21,8 @@
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
     "mongoose": "^6.4.0",
-    "nodemon": "^2.0.18"
+    "nodemon": "^2.0.18",
+    "sanitize-html": "^2.7.0"
   },
   "devDependencies": {
     "eslint": "^8.18.0"

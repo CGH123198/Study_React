@@ -46,10 +46,10 @@ const PostItem = ({post}) => {
     return (
         <PostItemBlock>
             <h2>
-                <Link to={`/@{user.username}`}>{title}</Link>
+                <Link to={`/@{user.username}/${_id}`}>{title}</Link>
             </h2>
             <SubInfo 
-                username="username"
+                username={user.username}
                 publishedDate={new Date(publishedDate)}
             />
             <Tags tags={tags}/>
@@ -67,14 +67,15 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
             <WritePostButtonWrapper>
                 { showWriteButton && (
                     <Button cyan to="/write">
-                    새 글 작성하기
+                        새 글 작성하기
                     </Button>
                 )}
             </WritePostButtonWrapper>
+            
             {!loading && posts && (
                 <div>
                     {posts.map(post => (
-                        <postItem post={post} key={post._id} />
+                        <PostItem post={post} key={post._id} />
                     ))}
                 </div>
             )}

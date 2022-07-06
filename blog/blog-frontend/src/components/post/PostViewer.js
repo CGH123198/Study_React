@@ -6,6 +6,7 @@ import Tags from '../common/Tags';
 
 const PostViewerBlock = styled.div`
     margin-top: 4rem;
+    margin-left: 1rem;
 `;
 
 const PostHead = styled.div`
