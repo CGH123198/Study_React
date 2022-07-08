@@ -5,7 +5,7 @@ import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 
 const PostViewerBlock = styled.div`
-    margin-top: 4rem;
+    margin-top: 2rem;
     margin-left: 1rem;
 `;
 
@@ -25,7 +25,7 @@ const PostContent = styled.div`
     color: ${palette.gray[8]};
 `;
 
-const PostViewer = ({post, loading, error}) => {
+const PostViewer = ({post, loading, error, actionButtons}) => {
 
     if(error) {
         if(error.response && error.response.status === 404){
@@ -51,6 +51,7 @@ const PostViewer = ({post, loading, error}) => {
                 />
                 <Tags tags={tags}/>
             </PostHead>
+            {actionButtons}
             <PostContent
                 dangerouslySetInnerHTML={{ __html: body}}
             />
