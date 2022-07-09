@@ -12,6 +12,7 @@
         + react-helmet-async
         + styled-components
         + immer
+        + axios
             
 ## 느낀점 & 계획
 + 1. redux와 redux-saga의 사용 이유에 대해 확실히 이해할 수 있었다.(비동기 처리, 전역 state 관리)
